@@ -1,38 +1,25 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { toggleFavorite } from '../redux/actions';
 
-function MovieCard({ movie, isFavorite }) {
-  const dispatch = useDispatch();
-
-  const handleFavoriteToggle = () => {
-    dispatch(toggleFavorite(movie));
-  };
-
+function MovieCard({ movie, isFavorite, handleFavoriteToggle }) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <img
-        src={movie.image}
-        alt={movie.title}
-        className="w-full h-64 object-cover"
-      />
-      <div className="p-4">
-        <h3 className="text-xl font-bold mb-2">{movie.title}</h3>
-        <p className="text-gray-700 mb-2">Rating: {movie.rating}</p>
-        <p className="text-gray-700 mb-4">{movie.description}</p>
+    <div className="max-w-xs mx-auto bg-gray-200 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-110 relative">
+      <div className="p-8 z-10">
+        <h3 className="text-3xl font-bold mb-4 text-center text-white">{movie.movie}</h3>
+        <p className="text-lg text-gray-300 mb-4 text-center">Rating: {movie.rating}</p>
+        <p className="text-gray-400 mb-8 text-center">{movie.description}</p>
         <button
-          onClick={handleFavoriteToggle}
-          className={`bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded ${
-            isFavorite ? 'bg-red-500 hover:bg-red-600' : ''
+          onClick={() => handleFavoriteToggle(movie)}
+          className={`inline-flex items-center justify-center w-full py-2 mt-4 px-6 font-medium rounded shadow-md hover:bg-blue-700 hover:text-white transition-colors duration-150 ${
+            isFavorite? 'bg-red-500 text-white' : 'bg-blue-500'
           }`}
         >
-          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+          {isFavorite? 'Remove from Favorites' : 'Add to Favorites'}
         </button>
         <a
-          href={movie.imdbUrl}
+          href={movie.imdb_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded"
+          className="mt-4 inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded transition-colors duration-150"
         >
           View on IMDb
         </a>
